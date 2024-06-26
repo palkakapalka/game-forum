@@ -44,4 +44,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function all_post(){
+        return $this->hasMany(Post::class, 'user_id');
+    }
 }
+

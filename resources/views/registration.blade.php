@@ -19,6 +19,5 @@
    <button type="submit">Registration</button>
     </form>
 </div>
-    <a href="/back">Back</a><br><br>
 </body>
 </html>

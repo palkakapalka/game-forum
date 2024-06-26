@@ -22,18 +22,7 @@
                 <p>{{ $post['body'] }}</p>
             </div>
         @endforeach
-
-        <form action="/logout" method="POST">
-            @csrf
-            <button type="submit">Log out</button>
-        </form>
-        <a href="/create_post">Create post</a>
     @else
-        <div class="login">
-            <a href="/registration/">Registration</a>
-            <a href="/login/">Login</a>
-        </div>
-
         <h2>All Posts</h2>
         @foreach ($posts as $post)
             <div class="post_list">
@@ -48,7 +37,12 @@
     @auth
         <p class="username">{{ Auth::user()->name }}</p>
         <p class="role">{{ Auth::user()->role }}</p>
+        <form action="/logout" method="POST">
+            @csrf
+            <button type="submit">Log out</button>
+        </form>
         <button>#-List</button>
+        <a href="/create_post">Create post</a>
     @else
         <a href="/registration/">Registration</a>
         <a href="/login/">Login</a>

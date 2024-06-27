@@ -33,6 +33,11 @@ Route::get('/login', [UserController::class, function(){
     return view('login');
 }]);
 
+Route::get('/all-posts', function () {
+    $posts = Post::all();
+    return view('all-posts',['posts'=>$posts]);
+});
+
 Route::get('/create_post', [UserController::class, function(){
     return view('create_post');
 }]);

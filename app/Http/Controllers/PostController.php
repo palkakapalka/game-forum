@@ -14,7 +14,9 @@ class PostController extends Controller
     }
 
     public function deletePost(Post $post){
+
         if(auth()->user()->id === $post['user_id'] || auth()->user()->userType === 'admin' ){
+
             $post->delete();
         }
         return redirect('/');

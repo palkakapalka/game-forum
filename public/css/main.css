@@ -54,7 +54,7 @@ body {
 .post_list {
     border: 2px solid;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-top: 20px;
     background-color: #e7f7e7;
     transition: transform 0.3s, box-shadow 0.3s;
     position: relative;

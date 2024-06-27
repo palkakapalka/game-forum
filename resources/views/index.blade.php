@@ -9,8 +9,10 @@
 <body>
 <div id="sidebar">
     <h3>50 newest post</h3>
-    <p>1. Post title</p>
-    <p>#A #B #C</p>
+    @foreach ($posts as $post)
+                <h4>{{ $post['title'] }}</h4>
+                <p>Tag</p>
+        @endforeach
 </div>
 
 <div id="main-content">
@@ -20,6 +22,12 @@
             <div class="post_list">
                 <h3>{{ $post['title'] }}</h3>
                 <p>{{ $post['body'] }}</p>
+                <p><a href="/edit-post/{{$post->id}}">Edit</a></p>
+                <form action="/delete-post/{{$post->id}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button>Delete</button>
+                </form>
             </div>
         @endforeach
     @else
@@ -36,7 +44,7 @@
 <div id="user-info">
     @auth
         <p class="username">{{ Auth::user()->name }}</p>
-        <p class="role">{{ Auth::user()->role }}</p>
+        <p class="role">{{ Auth::user()->userType }}</p>
         <form action="/logout" method="POST">
             @csrf
             <button type="submit">Log out</button>

@@ -50,7 +50,9 @@
             <button type="submit">Log out</button>
         </form>
         <button>#-List</button>
-        <a href="/create_post">Create post</a>
+        @if(Auth::user()->userType == "admin" || Auth::user()->userType == "creater")<a href="/create_post">Create post</a> @endif
+
+        @if(Auth::user()->userType == "admin")<a href="/admin-users">Admin Section</a> @endif
     @else
         <a href="/registration/">Registration</a>
         <a href="/login/">Login</a>

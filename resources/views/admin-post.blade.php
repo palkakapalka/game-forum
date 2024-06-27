@@ -3,11 +3,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('css/admin_post.css') }}">
 </head>
 <body>
 @can('viewAdminSection', Auth::user())
+            <div class="menu">
+                <a href="/admin-users">All Users</a>
+                <a href="/">To main</a>
+            </div>
 
-            <a href="/admin-users">All Users</a>
+
             <h2>All Posts</h2>
 
             @else

@@ -1,0 +1,76 @@
+/* Общие стили для body и контейнеров */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.menu a {
+    text-decoration: none;
+    background-color: #64dc35;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user_list {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.user_list h5 {
+    margin-top: 0;
+    color: #333;
+}
+
+.user_list p {
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.user_list a {
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border: none;
+    padding: 8px 22px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user_list a:hover {
+    text-decoration: underline;
+}
+
+.user_list form {
+    margin-top: 10px;
+}
+
+.user_list button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user_list button:hover {
+    background-color: #c82333;
+}
+
+h2 {
+    color: #333;
+    margin-top: 20px;
+}
+
+p {
+    color: #666;
+    font-size: 16px;
+}

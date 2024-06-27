@@ -3,11 +3,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('css/admin_users.css') }}">
 </head>
 <body>
 @can('viewAdminSection', Auth::user())
-
-            <a href="/admin-post">All Post</a>
+            <div class="menu">
+                <a href="/admin-post">All Post</a>
+                <a href="/">To main</a>
+            </div>
             <h2>All Users</h2>
             @foreach ($users as $user)
             <div class="user_list">

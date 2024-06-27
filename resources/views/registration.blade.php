@@ -18,6 +18,7 @@
         <input type="text" name="password" placeholder="password"><br><br>
    <button type="submit">Registration</button>
     </form>
+    <a href="/">Back</a>
 </div>
 </body>
 </html>

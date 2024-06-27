@@ -20,6 +20,7 @@
         </div>
         <button type="submit">Login</button>
     </form>
+    <a href="/">Back</a>
 </div>
 
 </body>

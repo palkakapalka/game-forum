@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/create_post.css') }}">
 </head>
 <body>
 <div class="head-div">
@@ -16,10 +16,13 @@
         <div>
             <label>Texts</label><br>
             <textarea name="body" cols="35" rows="20"  placeholder="Texts......"></textarea><br>
+            <br>
+            <input type="file"  name="ImagePath" accept="image/png, image/jpeg" />
         </div>
         <br>
         <button type="submit">Save</button>
     </form>
+    <a href="/">Back</a>
 </div>
 
 </body>

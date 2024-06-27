@@ -20,23 +20,28 @@
         <h2>All Posts</h2>
         @foreach ($userPost as $post)
             <div class="post_list">
-                <h3>{{ $post['title'] }}</h3>
-                <p>{{ $post['body'] }}</p>
-                <p><a href="/edit-post/{{$post->id}}">Edit</a></p>
-                <form action="/delete-post/{{$post->id}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button>Delete</button>
-                </form>
+                <div class="post">
+                    <h3>{{ $post['title'] }}</h3>
+                    <p>{{ $post['body'] }}</p>
+                </div>
+                <div class="action">
+                    <p><a href="/edit-post/{{$post->id}}">Edit</a></p>
+                    <form action="/delete-post/{{$post->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button>Delete</button>
+                    </form>
+                </div>
+
             </div>
         @endforeach
     @else
         <h2>All Posts</h2>
         @foreach ($posts as $post)
-            <div class="post_list">
+            <a href="view-post/{{$post->id}}"><div class="post_list">
                 <h3>{{ $post['title'] }}</h3>
                 <p>{{ $post['body'] }}</p>
-            </div>
+            </div></a>
         @endforeach
     @endauth
 </div>
@@ -47,10 +52,12 @@
         <p class="role">{{ Auth::user()->userType }}</p>
         <form action="/logout" method="POST">
             @csrf
-            <button type="submit">Log out</button>
+            <button class="logout" type="submit">Log out</button>
         </form>
-        <button>#-List</button>
-        <a href="/create_post">Create post</a>
+        <button class="list-of-#">#-List</button>
+        @if(Auth::user()->userType == "admin" || Auth::user()->userType == "creater")<a href="/create_post">Create post</a> @endif
+
+        @if(Auth::user()->userType == "admin")<a href="/admin-users">Admin Section</a> @endif
     @else
         <a href="/registration/">Registration</a>
         <a href="/login/">Login</a>

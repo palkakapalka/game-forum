@@ -57,10 +57,7 @@ class UserController extends Controller
         ]);
         if(auth()->attempt(['name' => $incomingFilds['loginname'], 'password'=>$incomingFilds['loginpassword']])){
 
-               // $request->session()->regenerate();
-                if(auth()->user()->userType === 'admin'){
-                    return redirect('admin-post');
-                }
+
         }
         return redirect('/');
     }

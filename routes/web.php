@@ -15,6 +15,7 @@ Route::get('/', function () {
 Route::get('/registration', [UserController::class, function(){
     return view('registration');
 }]);
+
 Route::get('/admin', function(){
     $posts = Post::all();
     return view('admin-post', ['posts'=>$posts]);
@@ -24,10 +25,7 @@ Route::get('/admin-users', function(){
     return view('admin-users', ['users'=>$users]);
 });
 
-Route::get('/admin-post', function(){
-    $posts = Post::all();
-    return view('admin-post', ['posts'=>$posts]);
-});
+
 Route::get('/admin-urers', function(){
     return view('admin-users');
 });
@@ -56,3 +54,5 @@ Route::delete('/delete-post/{post}', [PostController::class, 'deletePost']);
 Route::get('/edit-users/{user}', [UserController::class, 'showEditScreenUser']);
 Route::put('/edit-user/{user}', [UserController::class, 'updateuser']);
 Route::delete('/delete-user/{user}', [UserController::class, 'deleteUser']);
+
+Route::get('/view-post/{post}', [PostController::class, 'showPostScreen']);

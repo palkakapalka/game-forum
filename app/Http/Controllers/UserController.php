@@ -44,20 +44,21 @@ class UserController extends Controller
             'email'=>['required','email',Rule::unique('users', 'email')],
             'password'=>['required','min:6','max:50']
         ]);
-        ///////$incomingFilds['password']=bcrypt($incomingFilds['password']);///
         $user = User::create( $incomingFilds);
         auth()->login($user);
         return redirect('/');
     }
     public function login (Request $request) {
-        $user =
         $incomingFilds = $request->validate([
             'loginname'=>'required',
             'loginpassword'=>'required'
         ]);
         if(auth()->attempt(['name' => $incomingFilds['loginname'], 'password'=>$incomingFilds['loginpassword']])){
 
-
+               // $request->session()->regenerate();
+                if(auth()->user()->userType === 'admin'){
+                    return redirect('admin-post');
+                }
         }
         return redirect('/');
     }

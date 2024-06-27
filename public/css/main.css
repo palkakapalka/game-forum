@@ -2,6 +2,8 @@ body {
     display: flex;
     margin: 0;
     font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
 }
 
 #sidebar {
@@ -9,27 +11,80 @@ body {
     padding: 20px;
     box-sizing: border-box;
     border-right: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 #main-content {
     width: 60%;
     padding: 20px;
     box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    margin: 0 20px;
+}
+
+.action {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: right;
+}
+
+#main-content a{
+    text-decoration: none;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 8px 23px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#main-content button{
+    text-decoration: none;
+    background-color: #DC3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .post_list {
-    border: 2px solid black;
+    border: 2px solid;
     padding: 10px;
     margin-bottom: 20px;
+    background-color: #e7f7e7;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    padding-right: 100px;
+    text-overflow: ellipsis;
+}
+
+.post_list:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .post_list h3 {
     font-size: 24px;
     margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .post_list p {
     font-size: 14px;
+    color: #555;
+}
+
+.post p {
+    font-size: 14px;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #user-info {
@@ -37,6 +92,8 @@ body {
     padding: 20px;
     box-sizing: border-box;
     text-align: right;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 #user-info p {
@@ -45,6 +102,8 @@ body {
 
 #user-info .username {
     font-size: 20px;
+    color: #333;
+    font-weight: bold;
 }
 
 #user-info .role {
@@ -52,16 +111,36 @@ body {
     color: gray;
 }
 
-#user-info button {
+.logout  {
     margin-top: 10px;
     padding: 5px 10px;
     font-size: 14px;
     cursor: pointer;
+    background-color: #DC3545;
+    color: white;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.list-of-\# {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #45a049;
+    color: white;
+    border: none;
 }
 
 #user-info a {
     display: block;
     margin-top: 10px;
     text-decoration: none;
-    color: black;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 190px;
+    text-align: center;
 }
+

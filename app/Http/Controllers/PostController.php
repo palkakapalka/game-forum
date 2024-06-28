@@ -49,7 +49,7 @@ class PostController extends Controller
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
         ]);
-        dd($post['ImagePath']);
+
             $incomingFilds['title'] = strip_tags($incomingFilds['title']);
             $incomingFilds['body'] = strip_tags($incomingFilds['body']);
             if ($request->hasFile('ImagePath')) {

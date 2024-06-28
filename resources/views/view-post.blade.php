@@ -21,11 +21,16 @@
         <textarea name="body" cols="35" rows="20" placeholder="Texts......"></textarea><br>
         <button type="submit">Save</button>   <a href="/">Back</a>
     </form>
+
+
 </div>
-<h2>Tags</h2>
+<h2>Tags:</h2>
+<div class="tags">
     @foreach($post->tags as $tag)
-        <p>{{ $tag->name }}</p>
+        <p>#{{ $tag->name }}</p>
     @endforeach
+</div>
+
 
 <div class="comments-section">
     <h2>Comments</h2>

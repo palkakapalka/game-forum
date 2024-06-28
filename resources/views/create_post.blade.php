@@ -18,6 +18,7 @@
             <textarea name="body" cols="35" rows="20"  placeholder="Texts......"></textarea><br>
             <br>
             <input type="file"  name="ImagePath" accept="image/png, image/jpeg" />
+
             <label >Tags:</label><br>
         @foreach($tags as $tag)
             <input type="checkbox" name="tags[]" value="{{ $tag->id }}"> {{ $tag->name }}<br>

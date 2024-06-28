@@ -27,7 +27,7 @@
             @endforeach
         @endif
         @if(Auth::user()->userType == "admin" || Auth::user()->userType == "creater")
-                <a class="switch" href="/all-posts">All Posts</a>
+                <a class="switch" href="/all-posts">All Posts</a> <a class="switch" href="/create_tag">Createtags</a>
                 @foreach ($userPost as $post)
                     <div class="post_list">
                         <div class="post">
@@ -45,7 +45,7 @@
 
                     </div>
                 @endforeach
-                <a href="/create_tag">Createtags</a>
+
         @endif
 
     @else

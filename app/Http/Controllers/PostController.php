@@ -29,7 +29,7 @@ class PostController extends Controller
         $incomingFilds = $request->validate([
             'title'=>'required',
             'body'=>'required',
-            'ImagePath'=>'max:1048'
+            'ImagePath'=>'required|max:1048'
         ]);
             $incomingFilds['title'] = strip_tags($incomingFilds['title']);
             $incomingFilds['body'] = strip_tags($incomingFilds['body']);

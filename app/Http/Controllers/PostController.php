@@ -2,15 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function create()
+    {
+        // Получение всех тегов из базы данных
+        $tags = Tag::all();
+
+        // Передача тегов в представление
+        return view('posts.create', compact('tags'));
+    }
 
     public function showPostScreen(Post $post){
+        $posts = Post::with('tags')->get();
         return view('view-post',['post' => $post]);
+    }
+
+    public function show(Post $post)
+    {
+        $post->load('tags', 'comments.user');
+        return view('posts.show', compact('post'));
     }
 
     public function deletePost(Post $post){
@@ -30,6 +46,8 @@ class PostController extends Controller
             'title'=>'required',
             'body'=>'required',
             'ImagePath'=>'max:2048',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
         ]);
         dd($post['ImagePath']);
             $incomingFilds['title'] = strip_tags($incomingFilds['title']);
@@ -47,7 +65,8 @@ class PostController extends Controller
             }
 
             //dd($incomingFilds);
-            $post->update($incomingFilds);
+            $post=Post::create($incomingFilds);
+            $post->tags()->sync($request->input('tags', []));
             return redirect('/');
 
     }
@@ -59,9 +78,7 @@ class PostController extends Controller
 
     }
 
-
-    public function createPost(Request $request)
-    {
+    public function createPost(Request $request){
         if ($request->hasFile('ImagePath')) {
             $imageFile = $request->file('ImagePath');
 
@@ -71,27 +88,25 @@ class PostController extends Controller
             // Сохраняем изображение с оригинальным именем в profile_images
             $incomingFields['image_path'] = $imageFile->storeAs('/', $originalFileName, 'public');
 
-            $incomingFields = $request->validate([
-                'title' => 'required',
-                'body' => 'required',
-                'ImagePath' => 'max:2048',
-            ]);
-            $incomingFields['title'] = strip_tags($incomingFields['title']);
-            $incomingFields['body'] = strip_tags($incomingFields['body']);
-            $incomingFields['user_id'] = auth()->id();
-            $incomingFields['ImagePath'] = $originalFileName;
+        $incomingFilds = $request->validate([
+            'title'=>'required',
+            'body'=>'required',
+            'ImagePath'=>'max:1048',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
+
+        ]);
+        $incomingFilds['title'] = strip_tags($incomingFilds['title']);
+        $incomingFilds['body'] = strip_tags($incomingFilds['body']);
+        $incomingFilds['user_id'] = auth()->id();
+        $incomingFields['ImagePath'] = $originalFileName;
+
+        if ($request->hasFile('ImagePath')) {
+            // Сохранение нового изображения
+            $incomingFilds['ImagePath'] = $request->file('ImagePath')->store('profile_images', 'public');
         }
-
-
-
-
-        // Создаем пост в базе данных
-        Post::create($incomingFields);
-
-        // Перенаправляем пользователя на главную страницу
+        //dd($incomingFilds);
+        $post=Post::create($incomingFilds);
+        $post->tags()->sync($request->input('tags', []));
         return redirect('/');
-    }
-
-
-
-}
+}}}

@@ -1,49 +1,83 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* минимальная высота всего экрана */
-    background-color: #f4f4f4;
-}
-
-.head-div {
-    width: 80%; /* ширина контейнера */
-    max-width: 800px; /* максимальная ширина контейнера */
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center; /* центрирование содержимого внутри контейнера */
-}
-
-.head-div h1 {
-    margin-bottom: 10px;
-}
-
-.head-div p {
-    color: #666;
     line-height: 1.6;
-    margin-bottom: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #f8f9fa;
 }
 
-.head-div img {
+h1 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+p {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+img {
+    display: block;
+    margin: 0 auto 15px;
     max-width: 100%;
     height: auto;
-    border-radius: 10px;
-    display: block; /* убираем отступы вокруг изображения */
-    margin: 0 auto; /* центрируем изображение по горизонтали */
 }
 
-.head-div a {
-    display: block;
+div {
+    margin-bottom: 30px;
+}
+
+form {
     margin-top: 20px;
-    color: #333;
-    text-decoration: none;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
     font-weight: bold;
 }
 
-.head-div a:hover {
-    text-decoration: underline;
+textarea {
+    width: 70%;
+    height: 150px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Медиа-запрос для улучшения отзывчивости на мобильных устройствах */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    textarea {
+        font-size: 14px;
+    }
+
+    button[type="submit"] {
+        font-size: 14px;
+    }
 }

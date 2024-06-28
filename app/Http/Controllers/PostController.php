@@ -9,10 +9,24 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function create()
+    {
+        // Получение всех тегов из базы данных
+        $tags = Tag::all();
+
+        // Передача тегов в представление
+        return view('posts.create', compact('tags'));
+    }
 
     public function showPostScreen(Post $post){
         $posts = Post::with('tags')->get();
         return view('view-post',['post' => $post]);
+    }
+
+    public function show(Post $post)
+    {
+        $post->load('tags', 'comments.user');
+        return view('posts.show', compact('post'));
     }
 
     public function deletePost(Post $post){
@@ -35,9 +49,12 @@ class PostController extends Controller
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
         ]);
+
             $incomingFilds['title'] = strip_tags($incomingFilds['title']);
             $incomingFilds['body'] = strip_tags($incomingFilds['body']);
+
             $incomingFilds['user_id'] = auth()->id();
+
             if ($request->hasFile('ImagePath')) {
                 // Удаление старого изображения, если оно есть
                 if ($post->image_path) {
@@ -51,7 +68,9 @@ class PostController extends Controller
             }
 
             //dd($incomingFilds);
+
             $post->update($incomingFilds);
+
             $post->tags()->sync($request->input('tags', []));
             return redirect('/');
 
@@ -65,9 +84,11 @@ class PostController extends Controller
     public function createPost(Request $request){
         if ($request->hasFile('ImagePath')) {
             $imageFile = $request->file('ImagePath');
+
             $originalFileName = $imageFile->getClientOriginalName();
             $incomingFields['image_path'] = $imageFile->storeAs('/', $originalFileName, 'public');
             $incomingFilds = $request->validate([
+              
             'title'=>'required',
             'body'=>'required',
             'ImagePath'=>'max:1048',
@@ -81,8 +102,10 @@ class PostController extends Controller
         $incomingFields['ImagePath'] = $originalFileName;
 
         if ($request->hasFile('ImagePath')) {
+
             $incomingFilds['ImagePath'] = $request->file('ImagePath')->store('profile_images', 'public');
         }
+
         $post=Post::create($incomingFilds);
         $post->tags()->sync($request->input('tags', []));
         return redirect('/');

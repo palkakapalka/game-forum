@@ -1,0 +1,76 @@
+/* Основные стили для всего документа */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.head-div {
+    justify-content: center;
+    align-items: center;
+}
+
+/* Стили для контейнера формы */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+/* Стили для заголовка */
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Стили для метки (label) */
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* Стили для поля ввода (input) */
+input[type="text"] {
+    width: calc(100% - 22px); /* Учитывая padding и border */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Стили для кнопки */
+button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Стили для ссылки */
+a {
+    display: block;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

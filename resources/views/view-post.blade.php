@@ -9,6 +9,7 @@
 </head>
 
 <body>
+
     <h1>{{$post->title}}</h1>
     <p>{{$post->body}}</p>
 
@@ -33,6 +34,7 @@
         <p>{{ $tag->name }}</p>
     @endforeach
 
+
         <div class="comments-section">
             <h2>Comments</h2>
 
@@ -45,6 +47,17 @@
 
             </>
 
+<div class="comments-section">
+    <h2>Comments</h2>
+
+    @foreach($post->comments as $comment)
+        <div class="comment">
+            <p class="username">{{ $comment->user->name }}</p>
+            <p class="comment-text">{{ $comment->body }}</p>
+        </div>
+    @endforeach
+
+</div>
 
 </body>
 

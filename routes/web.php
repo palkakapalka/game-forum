@@ -1,10 +1,11 @@
 <?php
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
-use App\Models\Post;
-use App\Models\User;
+use App\Http\Controllers\CommentController;
 
 Route::get('/', function () {
     $posts = Post::all();
@@ -16,6 +17,9 @@ Route::get('/registration', [UserController::class, function(){
     return view('registration');
 }]);
 
+Route::get('/view-post', [UserController::class, function(){
+    return view('registration');
+}]);
 Route::get('/admin', function(){
     $posts = Post::all();
     return view('admin-post', ['posts'=>$posts]);
@@ -25,7 +29,10 @@ Route::get('/admin-users', function(){
     return view('admin-users', ['users'=>$users]);
 });
 
-
+Route::get('/admin-post', function(){
+    $posts = Post::all();
+    return view('admin-post', ['posts'=>$posts]);
+});
 Route::get('/admin-urers', function(){
     return view('admin-users');
 });
@@ -51,3 +58,8 @@ Route::put('/edit-user/{user}', [UserController::class, 'updateuser']);
 Route::delete('/delete-user/{user}', [UserController::class, 'deleteUser']);
 
 Route::get('/view-post/{post}', [PostController::class, 'showPostScreen']);
+
+Route::post('/create_commit/{post}', [CommentController::class, 'createComment']);
+Route::post('/commit/{post}', [CommentController::class, 'createComment']);
+
+Route::get('/create_commit/{post}', [CommentController::class, 'show'])->name('posts.show');;

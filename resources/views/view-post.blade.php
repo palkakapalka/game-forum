@@ -23,16 +23,19 @@
             <label>Comment Texts</label><br>
             <textarea name="body" cols="35" rows="20" placeholder="Texts......"></textarea><br>
             <button type="submit">Save</button> <a href="/">Back</a>
-        </form>
-        @else
-        <a href="/">Back</a>
-    @endauth
 
+        </form>
+
+    @endauth
+            <a href="/">Back</a>
     </div>
     <h2>Tags</h2>
-    @foreach($post->tags as $tag)
-        <p>{{ $tag->name }}</p>
-    @endforeach
+    <div class="tags">
+        @foreach($post->tags as $tag)
+            <p>#{{ $tag->name }}</p>
+        @endforeach
+    </div>
+
 
 
         <div class="comments-section">
@@ -44,8 +47,7 @@
                     <p class="comment-text">{{ $comment->body }}</p>
                 </div>
             @endforeach
-
-            </>
+            </div >
 
 <div class="comments-section">
     <h2>Comments</h2>

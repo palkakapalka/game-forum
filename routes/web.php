@@ -9,9 +9,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 
-use App\Http\Controllers\CommentController;
-
-
 Route::get('/', function () {
     $posts = Post::all();
     $postsUser = Post::where('user_id', auth()->id())->get();
@@ -25,7 +22,7 @@ Route::post('tags', [TagController::class, 'store'])->name('tags.store');
 Route::get('/registration', [UserController::class, 'create'
 ]);
 
-Route::get('/view-post', [UserController::class, function(){
+Route::get('/registration', [UserController::class, function(){
     return view('registration');
 }]);
 Route::get('/admin', function(){

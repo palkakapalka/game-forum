@@ -108,7 +108,7 @@ display: flex;
     margin-right: 7px;
 }
 
-/* Стили для заголовка раздела комментариев */
+
 .comments-section h2 {
     color: #333;
     font-size: 20px;
@@ -116,7 +116,7 @@ display: flex;
     text-align: center;
 }
 
-/* Стили для отдельного комментария */
+
 .comment {
     margin-bottom: 10px;
     padding: 10px;
@@ -124,13 +124,13 @@ display: flex;
     border-radius: 4px;
 }
 
-/* Стили для имени пользователя в комментарии */
+
 .comment .username {
     font-weight: bold;
     color: #007bff;
 }
 
-/* Стили для текста комментария */
+
 .comment .comment-text {
     margin-top: 5px;
     color: #333;

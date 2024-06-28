@@ -38,7 +38,7 @@ class UserController extends Controller
 
     }
 
-    public function register(Request $request){
+    public function create(Request $request){
         $incomingFilds = $request->validate([
             'name'=>['required', Rule::unique('users', 'name')],
             'email'=>['required','email',Rule::unique('users', 'email')],

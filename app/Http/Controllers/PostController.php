@@ -9,24 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    public function create()
-    {
-        // Получение всех тегов из базы данных
-        $tags = Tag::all();
-
-        // Передача тегов в представление
-        return view('posts.create', compact('tags'));
-    }
 
     public function showPostScreen(Post $post){
         $posts = Post::with('tags')->get();
         return view('view-post',['post' => $post]);
-    }
-
-    public function show(Post $post)
-    {
-        $post->load('tags', 'comments.user');
-        return view('posts.show', compact('post'));
     }
 
     public function deletePost(Post $post){
@@ -49,9 +35,9 @@ class PostController extends Controller
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
         ]);
-        dd($post['ImagePath']);
             $incomingFilds['title'] = strip_tags($incomingFilds['title']);
             $incomingFilds['body'] = strip_tags($incomingFilds['body']);
+            $incomingFilds['user_id'] = auth()->id();
             if ($request->hasFile('ImagePath')) {
                 // Удаление старого изображения, если оно есть
                 if ($post->image_path) {
@@ -65,17 +51,19 @@ class PostController extends Controller
             }
 
             //dd($incomingFilds);
-            $post=Post::create($incomingFilds);
+            $post->update($incomingFilds);
             $post->tags()->sync($request->input('tags', []));
             return redirect('/');
 
     }
     public function showEditScreen(Post $post){
-        if(auth()->user()->id !== $post['user_id']){
-            return redirect('index');
-        }
-        return view('edit-post',['post' => $post]);
 
+        // Получение всех тегов из базы данных
+        $tags = Tag::all();
+
+        // Загрузка связанных тегов и передача данных в представление
+        $post->load('tags');
+        return view('edit-post', compact('post', 'tags'));
     }
 
     public function createPost(Request $request){

@@ -20,10 +20,10 @@
         @if(Auth::user()->userType == "user")
             <h2>All Posts</h2>
             @foreach ($posts as $post)
-                <div class="post_list">
-                    <h3>{{ $post['title'] }}</h3>
-                    <p>{{ $post['body'] }}</p>
-                </div>
+                <a class="view-post" href="view-post/{{$post->id}}"><div class="post_list">
+                        <h3>{{ $post['title'] }}</h3>
+                        <p>{{ $post['body'] }}</p>
+                    </div></a>
             @endforeach
         @endif
         @if(Auth::user()->userType == "admin" || Auth::user()->userType == "creater")
@@ -50,7 +50,7 @@
     @else
         <h2>All Posts</h2>
         @foreach ($posts as $post)
-            <a href="view-post/{{$post->id}}"><div class="post_list">
+            <a class="view-post" href="view-post/{{$post->id}}"><div class="post_list">
                 <h3>{{ $post['title'] }}</h3>
                 <p>{{ $post['body'] }}</p>
             </div></a>

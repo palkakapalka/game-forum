@@ -25,6 +25,9 @@ Route::get('/admin-users', function(){
     return view('admin-users', ['users'=>$users]);
 });
 
+Route::get('/admin-post', function(){
+    return view('admin-post');
+});
 
 Route::get('/admin-urers', function(){
     return view('admin-users');

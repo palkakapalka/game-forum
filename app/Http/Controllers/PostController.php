@@ -46,9 +46,13 @@ class PostController extends Controller
             'title'=>'required',
             'body'=>'required',
             'ImagePath'=>'max:2048',
+<<<<<<< HEAD
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
+=======
+>>>>>>> 10fc336ebcc7ba7ef377d9b1eee905d9663eb3e1
         ]);
+        dd($post['ImagePath']);
             $incomingFilds['title'] = strip_tags($incomingFilds['title']);
             $incomingFilds['body'] = strip_tags($incomingFilds['body']);
             if ($request->hasFile('ImagePath')) {
@@ -56,7 +60,15 @@ class PostController extends Controller
                 if ($post->image_path) {
                     Storage::delete($post->image_path);
                 }
+<<<<<<< HEAD
                 $incomingFilds['ImagePath'] = $request->file('ImagePath')->store('ImagePath', 'public');
+=======
+                $filePath = $request->file('ImagePath')->store('profile_images', 'public');
+                $incomingFilds['ImagePath'] = Storage::url($filePath);
+            }else {
+                // Удалить из массива данных поле image_path, чтобы не перезаписать его null
+                unset($incomingFilds['ImagePath']);
+>>>>>>> 10fc336ebcc7ba7ef377d9b1eee905d9663eb3e1
             }
 
             //dd($incomingFilds);
@@ -74,6 +86,7 @@ class PostController extends Controller
     }
 
 
+<<<<<<< HEAD
     public function createPost(Request $request){
         $incomingFilds = $request->validate([
             'title'=>'required',
@@ -95,7 +108,40 @@ class PostController extends Controller
         $post=Post::create($incomingFilds);
         $post->tags()->sync($request->input('tags', []));
         return redirect('/');
+=======
+    public function createPost(Request $request)
+    {
+        if ($request->hasFile('ImagePath')) {
+            $imageFile = $request->file('ImagePath');
 
+            // Оригинальное имя файла
+            $originalFileName = $imageFile->getClientOriginalName();
+
+            // Сохраняем изображение с оригинальным именем в profile_images
+            $incomingFields['image_path'] = $imageFile->storeAs('/', $originalFileName, 'public');
+
+            $incomingFields = $request->validate([
+                'title' => 'required',
+                'body' => 'required',
+                'ImagePath' => 'max:2048',
+            ]);
+            $incomingFields['title'] = strip_tags($incomingFields['title']);
+            $incomingFields['body'] = strip_tags($incomingFields['body']);
+            $incomingFields['user_id'] = auth()->id();
+            $incomingFields['ImagePath'] = $originalFileName;
+        }
+>>>>>>> 10fc336ebcc7ba7ef377d9b1eee905d9663eb3e1
+
+
+
+
+        // Создаем пост в базе данных
+        Post::create($incomingFields);
+
+        // Перенаправляем пользователя на главную страницу
+        return redirect('/');
     }
 
-    }
+
+
+}

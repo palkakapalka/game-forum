@@ -12,10 +12,7 @@
 
 <div>
     @if($post->ImagePath)
-        <p>Profile Image:</p>
         <img src="{{asset('storage/' .$post->ImagePath) }}" alt="Profile Image" width="1000px">
-    @else
-        <p>No profile image available.</p>
     @endif
 
     <form action="/create_commit/{{$post->id}}" method="POST">

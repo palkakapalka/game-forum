@@ -57,11 +57,7 @@ class PostController extends Controller
 
     }
     public function showEditScreen(Post $post){
-
-        // Получение всех тегов из базы данных
         $tags = Tag::all();
-
-        // Загрузка связанных тегов и передача данных в представление
         $post->load('tags');
         return view('edit-post', compact('post', 'tags'));
     }
@@ -69,14 +65,9 @@ class PostController extends Controller
     public function createPost(Request $request){
         if ($request->hasFile('ImagePath')) {
             $imageFile = $request->file('ImagePath');
-
-            // Оригинальное имя файла
             $originalFileName = $imageFile->getClientOriginalName();
-
-            // Сохраняем изображение с оригинальным именем в profile_images
             $incomingFields['image_path'] = $imageFile->storeAs('/', $originalFileName, 'public');
-
-        $incomingFilds = $request->validate([
+            $incomingFilds = $request->validate([
             'title'=>'required',
             'body'=>'required',
             'ImagePath'=>'max:1048',
@@ -90,10 +81,8 @@ class PostController extends Controller
         $incomingFields['ImagePath'] = $originalFileName;
 
         if ($request->hasFile('ImagePath')) {
-            // Сохранение нового изображения
             $incomingFilds['ImagePath'] = $request->file('ImagePath')->store('profile_images', 'public');
         }
-        //dd($incomingFilds);
         $post=Post::create($incomingFilds);
         $post->tags()->sync($request->input('tags', []));
         return redirect('/');

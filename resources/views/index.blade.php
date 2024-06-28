@@ -31,8 +31,8 @@
                 @foreach ($userPost as $post)
                     <div class="post_list">
                         <div class="post">
-                            <h3>{{ $post['title'] }}</h3>
-                            <p>{{ $post['body'] }}</p>
+                        <a class="view-post" href="view-post/{{$post->id}}"><h3>{{ $post['title'] }}</h3>
+                            <p>{{ $post['body'] }}</p></a>
                         </div>
                         <div class="action">
                             <p><a href="/edit-post/{{$post->id}}">Edit</a></p>

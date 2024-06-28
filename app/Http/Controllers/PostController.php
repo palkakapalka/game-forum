@@ -29,8 +29,9 @@ class PostController extends Controller
         $incomingFilds = $request->validate([
             'title'=>'required',
             'body'=>'required',
-            'ImagePath'=>'max:2048'
+            'ImagePath'=>'max:2048',
         ]);
+        dd($post['ImagePath']);
             $incomingFilds['title'] = strip_tags($incomingFilds['title']);
             $incomingFilds['body'] = strip_tags($incomingFilds['body']);
             if ($request->hasFile('ImagePath')) {
@@ -38,7 +39,8 @@ class PostController extends Controller
                 if ($post->image_path) {
                     Storage::delete($post->image_path);
                 }
-                $incomingFilds['ImagePath'] = $request->file('ImagePath')->store('profile_images', 'public');
+                $filePath = $request->file('ImagePath')->store('profile_images', 'public');
+                $incomingFilds['ImagePath'] = Storage::url($filePath);
             }else {
                 // Удалить из массива данных поле image_path, чтобы не перезаписать его null
                 unset($incomingFilds['ImagePath']);
@@ -58,24 +60,38 @@ class PostController extends Controller
     }
 
 
-    public function createPost(Request $request){
-        $incomingFilds = $request->validate([
-            'title'=>'required',
-            'body'=>'required',
-            'ImagePath'=>'max:1048'
-        ]);
-        $incomingFilds['title'] = strip_tags($incomingFilds['title']);
-        $incomingFilds['body'] = strip_tags($incomingFilds['body']);
-        $incomingFilds['user_id'] = auth()->id();
-
+    public function createPost(Request $request)
+    {
         if ($request->hasFile('ImagePath')) {
-            // Сохранение нового изображения
-            $incomingFilds['image_path'] = $request->file('ImagePath')->store('profile_images', 'public');
+            $imageFile = $request->file('ImagePath');
+
+            // Оригинальное имя файла
+            $originalFileName = $imageFile->getClientOriginalName();
+
+            // Сохраняем изображение с оригинальным именем в profile_images
+            $incomingFields['image_path'] = $imageFile->storeAs('/', $originalFileName, 'public');
+
+            $incomingFields = $request->validate([
+                'title' => 'required',
+                'body' => 'required',
+                'ImagePath' => 'max:2048',
+            ]);
+            $incomingFields['title'] = strip_tags($incomingFields['title']);
+            $incomingFields['body'] = strip_tags($incomingFields['body']);
+            $incomingFields['user_id'] = auth()->id();
+            $incomingFields['ImagePath'] = $originalFileName;
         }
-        //dd($incomingFilds);
-        Post::create($incomingFilds);
+
+
+
+
+        // Создаем пост в базе данных
+        Post::create($incomingFields);
+
+        // Перенаправляем пользователя на главную страницу
         return redirect('/');
-
     }
 
-    }
+
+
+}

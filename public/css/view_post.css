@@ -90,10 +90,13 @@ button[type="submit"]:hover {
     margin-top: 30px;
     margin-bottom: 20px;
     border-radius: 4px;
+
     max-width: 600px;
+
     margin-left: auto;
     margin-right: auto;
 }
+
 
 .tags {
 display: flex;

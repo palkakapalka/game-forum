@@ -49,7 +49,6 @@
 
                     </div>
                 @endforeach
-
         @endif
 
     @else

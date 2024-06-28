@@ -52,6 +52,9 @@ class PostController extends Controller
 
             $incomingFilds['title'] = strip_tags($incomingFilds['title']);
             $incomingFilds['body'] = strip_tags($incomingFilds['body']);
+
+            $incomingFilds['user_id'] = auth()->id();
+
             if ($request->hasFile('ImagePath')) {
                 // Удаление старого изображения, если оно есть
                 if ($post->image_path) {
@@ -65,30 +68,27 @@ class PostController extends Controller
             }
 
             //dd($incomingFilds);
-            $post=Post::create($incomingFilds);
+
+            $post->update($incomingFilds);
+
             $post->tags()->sync($request->input('tags', []));
             return redirect('/');
 
     }
     public function showEditScreen(Post $post){
-        if(auth()->user()->id !== $post['user_id']){
-            return redirect('index');
-        }
-        return view('edit-post',['post' => $post]);
-
+        $tags = Tag::all();
+        $post->load('tags');
+        return view('edit-post', compact('post', 'tags'));
     }
 
     public function createPost(Request $request){
         if ($request->hasFile('ImagePath')) {
             $imageFile = $request->file('ImagePath');
 
-            // Оригинальное имя файла
             $originalFileName = $imageFile->getClientOriginalName();
-
-            // Сохраняем изображение с оригинальным именем в profile_images
             $incomingFields['image_path'] = $imageFile->storeAs('/', $originalFileName, 'public');
-
-        $incomingFilds = $request->validate([
+            $incomingFilds = $request->validate([
+              
             'title'=>'required',
             'body'=>'required',
             'ImagePath'=>'max:1048',
@@ -102,10 +102,10 @@ class PostController extends Controller
         $incomingFields['ImagePath'] = $originalFileName;
 
         if ($request->hasFile('ImagePath')) {
-            // Сохранение нового изображения
+
             $incomingFilds['ImagePath'] = $request->file('ImagePath')->store('profile_images', 'public');
         }
-        //dd($incomingFilds);
+
         $post=Post::create($incomingFilds);
         $post->tags()->sync($request->input('tags', []));
         return redirect('/');

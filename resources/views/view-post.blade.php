@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,33 +9,35 @@
 <body>
 <h1>{{$post->title}}</h1>
 <p>{{$post->body}}</p>
+
 <div>
     @if($post->ImagePath)
-    <p>Profile Image:</p>
-        <img src="{{asset('storage/' .$post->ImagePath) }}" alt="ffff" width="1000px">
-        @else
-            <p>No profile image available.</p>
-        @endif
+        <p>Profile Image:</p>
+        <img src="{{asset('storage/' .$post->ImagePath) }}" alt="Profile Image" width="1000px">
+    @else
+        <p>No profile image available.</p>
+    @endif
 
+    <form action="/create_commit/{{$post->id}}" method="POST">
+        @csrf
+        <label>Comment Texts</label><br>
+        <textarea name="body" cols="35" rows="20" placeholder="Texts......"></textarea><br>
+        <button type="submit">Save</button>   <a href="/">Back</a>
+    </form>
+</div>
 
-        <form action="/create_commit/{{$post->id}}" method="POST">
-            @csrf
-                <label>Comment Texts</label><br>
-                <textarea name="body" cols="35" rows="20"  placeholder="Texts......"></textarea><br>
-            <button type="submit">Save</button>   <a href="/">Back</a>
-        </form>
-        <h2>Comments</h2>
-        @foreach($post->comments as $comments)
-            <p>{{ $comments->user->name }}: {{ $comments->body }}</p>
+<!-- Добавленный блок для раздела с комментариями -->
+<div class="comments-section">
+    <h2>Comments</h2>
 
-        @endforeach
+    @foreach($post->comments as $comment)
+        <div class="comment">
+            <p class="username">{{ $comment->user->name }}</p>
+            <p class="comment-text">{{ $comment->body }}</p>
+        </div>
+    @endforeach
 
 </div>
 
-
-
-
-
 </body>
 </html>
-

@@ -38,8 +38,7 @@ class PostController extends Controller
                 if ($post->image_path) {
                     Storage::delete($post->image_path);
                 }
-                $filePath = $request->file('ImagePath')->store('profile_images', 'public');
-                $incomingFilds['ImagePath'] = Storage::url($filePath);
+                $incomingFilds['ImagePath'] = $request->file('ImagePath')->store('profile_images', 'public');
             }else {
                 // Удалить из массива данных поле image_path, чтобы не перезаписать его null
                 unset($incomingFilds['ImagePath']);

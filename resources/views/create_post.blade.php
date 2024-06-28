@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="head-div">
-    <form action="/create_post" method="POST" enctype="multipart/form-data">
+    <form action="/create_post" method="POST">
         @csrf
         <div>
             <label>Title</label><br>
@@ -18,6 +18,11 @@
             <textarea name="body" cols="35" rows="20"  placeholder="Texts......"></textarea><br>
             <br>
             <input type="file"  name="ImagePath" accept="image/png, image/jpeg" />
+            <label >Tags:</label><br>
+        @foreach($tags as $tag)
+            <input type="checkbox" name="tags[]" value="{{ $tag->id }}"> {{ $tag->name }}<br>
+        @endforeach
+        </select><br><br>
                 <button type="submit">Save</button>
         </div>
         <br>

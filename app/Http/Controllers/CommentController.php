@@ -11,7 +11,7 @@ class CommentController
 
     public function show(Post $post)
     {
-        $post->load('comments.user');
+        $post->load('tags', 'comments.user');
 
         return view('view-post', ['post' => $post]);
     }

@@ -11,7 +11,11 @@
     <h3>50 newest post</h3>
     @foreach ($posts as $post)
                 <h4>{{ $post['title'] }}</h4>
-                <p>Tag</p>
+        <div class="tags">
+            @foreach($post->tags as $tag)
+               #{{ $tag->name }}
+            @endforeach
+        </div>
         @endforeach
 </div>
 

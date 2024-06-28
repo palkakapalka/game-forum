@@ -69,7 +69,6 @@ button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-/* Медиа-запрос для улучшения отзывчивости на мобильных устройствах */
 @media (max-width: 768px) {
     h1 {
         font-size: 24px;
@@ -84,9 +83,6 @@ button[type="submit"]:hover {
     }
 }
 
-/* Дополнительные стили для новых элементов <div> */
-
-/* Стили для блока, содержащего комментарии */
 .comments-section {
     background-color: #fff;
     border: 1px solid #ccc;
@@ -94,7 +90,7 @@ button[type="submit"]:hover {
     margin-top: 30px;
     margin-bottom: 20px;
     border-radius: 4px;
-    max-width: 600px; /* Ограничение максимальной ширины блока */
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -105,6 +101,7 @@ display: flex;
 }
 
 .tags p {
+    margin-top: 20px;
     margin-right: 7px;
 }
 

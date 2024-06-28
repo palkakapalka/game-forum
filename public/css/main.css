@@ -15,6 +15,13 @@ body {
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
+.tags {
+
+    display: flex;
+}
+
+
+
 #main-content {
     width: 60%;
     padding: 20px;

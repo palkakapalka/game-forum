@@ -25,8 +25,11 @@
         <button type="submit">Save</button>   <a href="/">Back</a>
     </form>
 </div>
+<h2>Tags</h2>
+    @foreach($post->tags as $tag)
+        <p>{{ $tag->name }}</p>
+    @endforeach
 
-<!-- Добавленный блок для раздела с комментариями -->
 <div class="comments-section">
     <h2>Comments</h2>
 

@@ -2,15 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function create()
+    {
+        // Получение всех тегов из базы данных
+        $tags = Tag::all();
+
+        // Передача тегов в представление
+        return view('posts.create', compact('tags'));
+    }
 
     public function showPostScreen(Post $post){
+        $posts = Post::with('tags')->get();
         return view('view-post',['post' => $post]);
+    }
+
+    public function show(Post $post)
+    {
+        $post->load('tags', 'comments.user');
+        return view('posts.show', compact('post'));
     }
 
     public function deletePost(Post $post){
@@ -29,7 +45,9 @@ class PostController extends Controller
         $incomingFilds = $request->validate([
             'title'=>'required',
             'body'=>'required',
-            'ImagePath'=>'max:2048'
+            'ImagePath'=>'max:2048',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
         ]);
             $incomingFilds['title'] = strip_tags($incomingFilds['title']);
             $incomingFilds['body'] = strip_tags($incomingFilds['body']);
@@ -38,14 +56,12 @@ class PostController extends Controller
                 if ($post->image_path) {
                     Storage::delete($post->image_path);
                 }
-                $incomingFilds['ImagePath'] = $request->file('ImagePath')->store('profile_images', 'public');
-            }else {
-                // Удалить из массива данных поле image_path, чтобы не перезаписать его null
-                unset($incomingFilds['ImagePath']);
+                $incomingFilds['ImagePath'] = $request->file('ImagePath')->store('ImagePath', 'public');
             }
 
             //dd($incomingFilds);
-            $post->update($incomingFilds);
+            $post=Post::create($incomingFilds);
+            $post->tags()->sync($request->input('tags', []));
             return redirect('/');
 
     }
@@ -62,7 +78,10 @@ class PostController extends Controller
         $incomingFilds = $request->validate([
             'title'=>'required',
             'body'=>'required',
-            'ImagePath'=>'max:1048'
+            'ImagePath'=>'max:1048',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
+
         ]);
         $incomingFilds['title'] = strip_tags($incomingFilds['title']);
         $incomingFilds['body'] = strip_tags($incomingFilds['body']);
@@ -70,10 +89,11 @@ class PostController extends Controller
 
         if ($request->hasFile('ImagePath')) {
             // Сохранение нового изображения
-            $incomingFilds['image_path'] = $request->file('ImagePath')->store('profile_images', 'public');
+            $incomingFilds['ImagePath'] = $request->file('ImagePath')->store('profile_images', 'public');
         }
         //dd($incomingFilds);
-        Post::create($incomingFilds);
+        $post=Post::create($incomingFilds);
+        $post->tags()->sync($request->input('tags', []));
         return redirect('/');
 
     }

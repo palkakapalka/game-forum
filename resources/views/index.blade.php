@@ -17,36 +17,26 @@
 
 <div id="main-content">
     @auth
-        @if(Auth::user()->userType == "user")
-            <h2>All Posts</h2>
-            @foreach ($posts as $post)
-                <div class="post_list">
+        <h2>All Posts</h2>
+        @foreach ($userPost as $post)
+            <div class="post_list">
+            <a href="view-post/{{$post->id}}">
+                <div class="post">
                     <h3>{{ $post['title'] }}</h3>
                     <p>{{ $post['body'] }}</p>
                 </div>
-            @endforeach
-        @endif
-        @if(Auth::user()->userType == "admin" || Auth::user()->userType == "creater")
-                <a class="switch" href="/all-posts">All Posts</a>
-                @foreach ($userPost as $post)
-                    <div class="post_list">
-                        <div class="post">
-                            <h3>{{ $post['title'] }}</h3>
-                            <p>{{ $post['body'] }}</p>
-                        </div>
-                        <div class="action">
-                            <p><a href="/edit-post/{{$post->id}}">Edit</a></p>
-                            <form action="/delete-post/{{$post->id}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button>Delete</button>
-                            </form>
-                        </div>
+                </a>
+                <div class="action">
+                    <p><a href="/edit-post/{{$post->id}}">Edit</a></p>
+                    <form action="/delete-post/{{$post->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button>Delete</button>
+                    </form>
+                </div>
 
-                    </div>
-                @endforeach
-        @endif
-
+            </div>
+        @endforeach
     @else
         <h2>All Posts</h2>
         @foreach ($posts as $post)

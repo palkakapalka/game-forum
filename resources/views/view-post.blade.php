@@ -14,6 +14,18 @@
     @else
         <p>No profile image available.</p>
     @endif
+    <h2>Comments</h2>
+    @foreach($post->comments as $comments)
+        <p>{{ $comments->body }}</p>
+        <p>By: {{ $comments->user->name }}</p>
+    @endforeach
+    <form action="/create_commit/{{$post->id}}" method="POST">
+        @csrf
+            <label>Texts</label><br>
+            <textarea name="body" cols="35" rows="20"  placeholder="Texts......"></textarea><br>
+        </div>
+        <button type="submit">Save</button>
+    </form>
 </div>
 
 

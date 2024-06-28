@@ -29,22 +29,19 @@ class PostController extends Controller
         $incomingFilds = $request->validate([
             'title'=>'required',
             'body'=>'required',
-            'ImagePath'=>'max:2048'
+            'ImagePath'=>'max:1048'
         ]);
             $incomingFilds['title'] = strip_tags($incomingFilds['title']);
             $incomingFilds['body'] = strip_tags($incomingFilds['body']);
+
             if ($request->hasFile('ImagePath')) {
                 // Удаление старого изображения, если оно есть
                 if ($post->image_path) {
                     Storage::delete($post->image_path);
                 }
-                $filePath = $request->file('ImagePath')->store('profile_images', 'public');
-                $incomingFilds['ImagePath'] = Storage::url($filePath);
-            }else {
-                // Удалить из массива данных поле image_path, чтобы не перезаписать его null
-                unset($incomingFilds['ImagePath']);
-            }
+                $incomingFilds['image_path'] = $request->file('ImagePath')->store('profile_images', 'public');
 
+            }
             //dd($incomingFilds);
             $post->update($incomingFilds);
             return redirect('/');
@@ -63,7 +60,7 @@ class PostController extends Controller
         $incomingFilds = $request->validate([
             'title'=>'required',
             'body'=>'required',
-            'ImagePath'=>'required|max:1048'
+            'ImagePath'=>'max:1048'
         ]);
         $incomingFilds['title'] = strip_tags($incomingFilds['title']);
         $incomingFilds['body'] = strip_tags($incomingFilds['body']);

@@ -17,10 +17,13 @@
             <label>Texts</label><br>
             <textarea name="body" cols="35" rows="20"  placeholder="Texts......"></textarea><br>
             <br>
+            <form action="upload.php" method="POST" enctype="multipart/form-data">
             <input type="file"  name="ImagePath" accept="image/png, image/jpeg" />
+                <button type="submit">Save</button>
+            </form>
         </div>
         <br>
-        <button type="submit">Save</button>
+
     </form>
     <a href="/">Back</a>
 </div>

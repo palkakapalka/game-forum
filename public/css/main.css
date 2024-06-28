@@ -107,7 +107,7 @@ body {
 }
 
 #user-info {
-    width: 20%;
+    width: auto;
     padding: 20px;
     box-sizing: border-box;
     text-align: right;

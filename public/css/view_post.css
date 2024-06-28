@@ -1,3 +1,5 @@
+/* Основные стили */
+
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -80,4 +82,47 @@ button[type="submit"]:hover {
     button[type="submit"] {
         font-size: 14px;
     }
+}
+
+/* Дополнительные стили для новых элементов <div> */
+
+/* Стили для блока, содержащего комментарии */
+.comments-section {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    max-width: 600px; /* Ограничение максимальной ширины блока */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Стили для заголовка раздела комментариев */
+.comments-section h2 {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Стили для отдельного комментария */
+.comment {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+/* Стили для имени пользователя в комментарии */
+.comment .username {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Стили для текста комментария */
+.comment .comment-text {
+    margin-top: 5px;
+    color: #333;
 }

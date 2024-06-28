@@ -27,7 +27,6 @@
         </form>
 
     @endauth
-            <a href="/">Back</a>
     </div>
     <h2>Tags</h2>
     <div class="tags">

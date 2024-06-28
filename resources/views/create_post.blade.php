@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="head-div">
-    <form action="/create_post" method="POST">
+    <form action="/create_post" method="POST" enctype="multipart/form-data">
         @csrf
         <div>
             <label>Title</label><br>

@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('css/view_post.css') }}">
 </head>
 <body>
 <h1>{{$post->title}}</h1>
@@ -27,6 +28,7 @@
         <button type="submit">Save</button>
     </form>
 </div>
+
 
 
 

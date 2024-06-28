@@ -18,9 +18,10 @@
             <textarea name="body" cols="35" rows="20"  placeholder="Texts......"></textarea><br>
             <br>
             <input type="file"  name="ImagePath" accept="image/png, image/jpeg" />
+                <button type="submit">Save</button>
         </div>
         <br>
-        <button type="submit">Save</button>
+
     </form>
     <a href="/">Back</a>
 </div>

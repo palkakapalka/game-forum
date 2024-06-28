@@ -14,7 +14,9 @@ class PostController extends Controller
     }
 
     public function deletePost(Post $post){
+
         if(auth()->user()->id === $post['user_id'] || auth()->user()->userType === 'admin' ){
+
             $post->delete();
         }
         return redirect('/');
@@ -61,7 +63,7 @@ class PostController extends Controller
         $incomingFilds = $request->validate([
             'title'=>'required',
             'body'=>'required',
-            'ImagePath'=>'required|max:1048'
+            'ImagePath'=>'max:1048'
         ]);
         $incomingFilds['title'] = strip_tags($incomingFilds['title']);
         $incomingFilds['body'] = strip_tags($incomingFilds['body']);

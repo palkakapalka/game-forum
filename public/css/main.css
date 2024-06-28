@@ -31,10 +31,28 @@ body {
     text-align: right;
 }
 
-#main-content a{
+.switch{
     text-decoration: none;
     background-color: #007BFF;
     color: white;
+    border: none;
+    padding: 8px 23px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action a{
+    text-decoration: none;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 8px 23px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#main-content a{
+    text-decoration: none;
     border: none;
     padding: 8px 23px;
     cursor: pointer;
@@ -54,7 +72,7 @@ body {
 .post_list {
     border: 2px solid;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-top: 20px;
     background-color: #e7f7e7;
     transition: transform 0.3s, box-shadow 0.3s;
     position: relative;
@@ -69,6 +87,7 @@ body {
 }
 
 .post_list h3 {
+    color: black;
     font-size: 24px;
     margin: 0;
     overflow: hidden;
